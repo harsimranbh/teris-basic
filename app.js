@@ -64,8 +64,48 @@ document.addEventListener('DOMContentLoaded',()=>{
       })
   }
 
-  draw()
+  //draw()
 
+  //make tetromino move down
+
+  timerId = setInterval(moveDown,100)
+
+  function moveDown(){
+      undraw()
+      currentPosition+=width
+      draw()
+      freeze()
+  }
+
+  //freeze function -> to take care of tetromino that has reached the bottom of the screen
+
+  function freeze(){
+      if(current.some(index=> squares[currentPosition+index+width].classList.contains('taken'))){
+        
+        
+        current.forEach(index=> squares[currentPosition+index].classList.add('taken'))
+
+        // again start a new tetromino
+        random = Math.floor(Math.random()*theTetrominoes.length)
+        current = theTetrominoes[random][currentRotation]
+        currentPosition = 4
+        draw()
+        console.log(currentPosition,index,width)
+        console.log(currentPosition+index+width)
+      }
+
+  }/*
+  function freeze() {
+    if(current.some(index => squares[currentPosition + index + width].classList.contains('taken'))) {
+      current.forEach(index => squares[currentPosition + index].classList.add('taken'))
+      //start a new tetromino falling
+      random = nextRandom
+      nextRandom = Math.floor(Math.random() * theTetrominoes.length)
+      current = theTetrominoes[random][currentRotation]
+      currentPosition = 4
+      draw()
+    }
+  }*/
 
 
 
